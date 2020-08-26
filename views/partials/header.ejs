@@ -4,32 +4,121 @@
         <title>
             YelpCamp
         </title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        
         
     </head>
+
     <body>
+    
+    
+        <div class="progress-bar" id="myBar"></div>
+    
 
-       
-            <nav class="navbar navbar-expand-lg navbar-light bg-success">
-                    <a class="navbar-brand" href="/">YelpCamp</a>
-                   
-                    <div class="collapse navbar-collapse">
-                      <ul class="nav navbar-nav navbar-right">
 
-                       <% if(!currentUser){ %>
-                          <li><a href="/login">Login</a></li>
-                          <li><a href="/register">Sign Up</a></li>
-                        <% } else{ %>
-                          <li><a href="">Signed in as...<strong><%=currentUser.username%></strong></a></li>
-                          <li><a href="/logout">Logout</a></li>
-                       <% } %>
-                        
-                        
-                      </ul>
-                        
-                        
-                      </div>
+  <!--navigation bar start-->
+	<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">YelpCamp</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <ul class="navbar-nav mr-auto">
+
+        <li class="nav-item active">
+          <a class="nav-link" href="/campgrounds">Home <span class="sr-only">(current)</span></a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="#aboutContainer">About</a>
+        </li>
+      
+        <li class="nav-item dropdown">
+          
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Campgrounds
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#1">Mount Alpha</a>
+            <a class="dropdown-item" href="#2">Mount Beta</a>
+            <a class="dropdown-item" href="#3">Mount Gamma</a>
+            <a class="dropdown-item" href="#4">Mount Zetta</a>
+          </div>
+
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="#download">Download the App</a>
+        </li>
+      </ul>
+      
+
+      <form class="form-inline my-2 my-lg-0 float-right">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search">
+      </form>
+
+        <% if(!currentUser){ %>
+          <li class="float-right">
+            <a class="btn btn-success my-2 my-sm-0 mr-2 " href="/login">Login</a>
+          </li>
+
+          <li class="float-right">
+            <a class="btn btn-primary my-2 my-sm-0" href="/login">Sign Up</a>
+          </li>
+
+        <% } else{ %>
+
+          <li class="float-right">
+            <a href="">Signed in as <strong><%=currentUser.username%></strong></a>
+          </li>
+
+          <li class="float-right">
+            <a class="btn btn-success my-2 my-sm-0 mr-2" href="/logout">Logout</a>
+          </li>
+
+        <% } %>
+
+    </div>
+
+  </nav>
+  
+  <!--navigation bar end-->
+
+
+
+    
+                <div class="container">
+                  <% if(success && success.length>0){ %>
+                    <div class="alert alert-success" role="alert">
+                      <%= success %>
                     </div>
-                </nav>
-        
+                  <% } %>
+
+                  <% if(error && error.length>0){ %>
+                    <div class="alert alert-danger" role="alert">
+                      <%= error %>
+                    </div>
+                  <% } %>
+
+                </div>
+                
+
+                
+                <script>
+                  // When the user scrolls the page, execute myFunction 
+                  window.onscroll = function() {myFunction()};
+                  
+                  function myFunction() {
+                    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    var scrolled = (winScroll / height) * 100;
+                    document.getElementById("myBar").style.width = scrolled + "%";
+                  }
+                  </script>

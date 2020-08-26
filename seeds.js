@@ -2,6 +2,7 @@ var mongoose=require("mongoose");
 var Campgrounds=require("./models/campground");
 var Comment=require("./models/comment");
 
+// arbitrary data for seeding the website at the beginning
 var data=[
     {
         name:"Mount A",
@@ -23,6 +24,7 @@ var data=[
 ]
 function seedDB(){
 
+    // remove previously existing data(campgrounds) and add seed data
     Campgrounds.remove({},function(err){
         if(err)
         {
@@ -31,6 +33,7 @@ function seedDB(){
         else{
             console.log("All campgrounds removed");
     
+            // adding seed data
             data.forEach(function(seed){
                 Campgrounds.create(seed,function(err,campground){
                     if(err)
